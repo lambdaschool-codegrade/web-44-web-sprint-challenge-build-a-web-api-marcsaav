@@ -21,8 +21,11 @@ server.use('/api/actions', actionsRouter)
 
 const projectsRouter = require('./projects/projects-router')
 
-server.use('/api/projects', projectsRouter)
+// server.use('/api/projects', projectsRouter)
 
+server.get('/', (req, res) => {
+    res.send(`<h1>Hey there! Welcome to my Projects/Actions API </h1>`)
+})
 
 // Do NOT `server.listen()` inside this file!
 
