@@ -10,7 +10,7 @@ const checkActionsId = async  (req, res, next) => {
                 req.action = action
                 next()
             } else {
-                res.status(404).json({ message: 'Action not found.'})
+                next({ status: 404, message: 'Action not found'})
             }
         })
 }

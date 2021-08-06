@@ -8,22 +8,22 @@ const Actions = require('./actions-model')
 
 const checkActionId = require('./actions-middleware')
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const actions = await Actions.get()
         res.status(200).json(actions)
     } catch(err) {
-        res.status(500).json({ message: err.message })
+        next(err)
     }
 })
 
-router.get('/:id', checkActionId, async (req, res) => {
+router.get('/:id', checkActionId, async (req, res, next) => {
     try {
         let { id } = req.params
         const action = await Actions.get(id)
         res.status(200).json(action)
     } catch(err) {
-        res.status(500).json({ message: err.message })
+        next(err)
     }
 })
 
