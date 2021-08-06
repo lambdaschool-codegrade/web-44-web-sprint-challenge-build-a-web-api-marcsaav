@@ -36,4 +36,14 @@ router.post('/', checkActionBody, async (req, res, next) => {
     }
 })
 
+router.put('/:id', checkActionId, checkActionBody, async (req, res, next) => {
+    try {
+        let { id } = req.params
+        const action = await Actions.update(id, req.body)
+        res.status(200).json(action)
+    } catch(err) {
+        next(err)
+    }
+})
+
 module.exports = router
