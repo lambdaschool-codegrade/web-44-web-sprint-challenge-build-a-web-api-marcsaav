@@ -2,15 +2,17 @@
 
 const Actions = require('./actions-model')
 
-const checkActionId = async  (req, res, next) => {
-    try {
-        let { id } = req.params
-        const action = await Actions.get(id)
-        req.action = action
-        next()
-    } catch(err) {
-        res.status(404).json({ message: err.message })
-    }
+const checkActionsId = async  (req, res, next) => {
+    let { id } = req.params
+    Actions.get(id)
+        .then((action) => {
+            if(action) {
+                req.action = action
+                next()
+            } else {
+                res.status(404).json({ message: 'Action not found.'})
+            }
+        })
 }
 
-module.exports = checkActionId
+module.exports = checkActionsId

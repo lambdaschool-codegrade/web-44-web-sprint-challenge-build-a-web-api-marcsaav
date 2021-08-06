@@ -19,7 +19,7 @@ server.use('/api/actions', actionsRouter)
 
 // Build your projects router in /api/projects/projects-router.js
 
-const projectsRouter = require('./projects/projects-router')
+// const projectsRouter = require('./projects/projects-router')
 
 // server.use('/api/projects', projectsRouter)
 
