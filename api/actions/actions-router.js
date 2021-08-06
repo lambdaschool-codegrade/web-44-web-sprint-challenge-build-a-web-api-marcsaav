@@ -19,9 +19,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', checkActionId, async (req, res, next) => {
     try {
-        let { id } = req.params
-        const action = await Actions.get(id)
-        res.status(200).json(action)
+        res.status(200).json(req.action)
     } catch(err) {
         next(err)
     }
@@ -41,6 +39,16 @@ router.put('/:id', checkActionId, checkActionBody, async (req, res, next) => {
         let { id } = req.params
         const action = await Actions.update(id, req.body)
         res.status(200).json(action)
+    } catch(err) {
+        next(err)
+    }
+})
+
+router.delete('/:id', checkActionId, async (req, res, next) => {
+    try {
+        let { id } = req.params
+        await Actions.remove(id)
+        res.status(200).json()
     } catch(err) {
         next(err)
     }
